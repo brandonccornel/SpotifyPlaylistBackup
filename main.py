@@ -8,7 +8,12 @@ class SpotifyFunctions:
         self.SPOTIFY_TOKEN = SPOTIFY_TOKEN
         self.USER_ID = USER_ID
 
-    def getPlaylists(self, limit=50):
+    def getPlaylists(self, limit=5):
+
+        if(limit>50):
+            print("Maximum playlist count is 50, please enter a number below it")
+            return
+
         playlistDict = []
         getPlaylistUrl = 'https://api.spotify.com/v1/me/playlists?limit=' + str(limit)
         headers = {'Authorization' : 'Bearer ' + self.SPOTIFY_TOKEN}
@@ -70,5 +75,9 @@ class SpotifyFunctions:
 if __name__ == '__main__':
     print('Backing up Playlists')
     cp = SpotifyFunctions()
-    cp.writeToFile(cp.getPlaylists(3))
-    cp.parseCSVAndCreatePlaylist()
+    dict = cp.getPlaylists(32323)
+    if(dict):
+        cp.writeToFile(dict)
+
+    #uncomment below if you want to create playlists from csv file
+    #cp.parseCSVAndCreatePlaylist()
