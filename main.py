@@ -73,11 +73,14 @@ class SpotifyFunctions:
                 self.addSongsToPlaylist(playlistID=playlistID, tracklist=row[2])
 
 if __name__ == '__main__':
+    #CHANGE THIS NUMBER TO THE AMOUNT OF PLAYLISTS YOU WANT TO BACKUP
+    playlistNum = 2
+
     print('Backing up Playlists')
     cp = SpotifyFunctions()
-    dict = cp.getPlaylists(32323)
+    dict = cp.getPlaylists(playlistNum)
     if(dict):
         cp.writeToFile(dict)
 
-    #uncomment below if you want to create playlists from csv file
+    #UNCOMMENT THIS IF YOU WANT TO CREATE PLAYLISTS FROM BACKUP
     #cp.parseCSVAndCreatePlaylist()
